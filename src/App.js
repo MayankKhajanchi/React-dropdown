@@ -5,49 +5,43 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      here: ""
-    }  
-    this.handle = this.handle.bind(this);
-    this.display = this.display.bind(this);
-    this.drop = this.drop.bind(this);
+      togg: false,
+      z: [1,2,3,4,5],
+      def: 'Select a number'
+    }
+    this.togg = this.togg.bind(this);
   }
-  handle = event => {
+  display = e => {
+    e.preventDefault();
+    console.log(this.state.def);
     this.setState({
-      here: event.target.value.toUpperCase(),
+      togg: false,
+      def: 'Select a number'
     })
   }
-  display = x => {
-    alert("This is your text -- " + this.state.here);
-    x.preventDefault();
+  togg = () => {
+    this.setState({
+      togg: !this.state.togg
+    })
   }
-  drop = () => {
-    const x = [1,2,3,4,5];
-    const y = x.map((number) => <option key={number.toString()}>{number}</option>)
-    return y;
-  }
-  new = () => {
-    const x = document.getElementById("select");
-    const y = [1,2,3,4,5];
-    const z = y.map((number) => <option key={number.toString()}>{number}</option>)
-    x.appendChild(z);
-    alert(z);
+  change = (e) => {
+    this.setState({
+      def: e.target.value
+    })
   }
   render() {
-    const z = [6,7,8,9,10];
     return (
       <div className="App">
-        
-        <select id="select" onClick={this.new}>
-          
-        </select>
-        
         <form>
-          <textarea onChange={this.handle}/>
+        <select onClick={this.togg}>
+          <option>{this.state.def}</option>
+            {this.state.togg ? "": this.state.z.map((num) => <option key={num} onClick={this.change} value={num}>{num}</option>)}
+          </select>
           <input type="submit" onClick={this.display}/>
         </form>
-        
+
         <p>
-          {this.state.here}
+          {this.state.def}
         </p>
 
       </div>
