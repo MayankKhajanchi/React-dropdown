@@ -13,7 +13,7 @@ class App extends Component {
   }
   display = e => {
     e.preventDefault();
-    console.log(this.state.def);
+    alert(this.state.def);
     this.setState({
       togg: false,
       def: 'Select a number'
@@ -39,10 +39,6 @@ class App extends Component {
           </select>
           <input type="submit" onClick={this.display}/>
         </form>
-
-        <p>
-          {this.state.def}
-        </p>
 
       </div>
     );
